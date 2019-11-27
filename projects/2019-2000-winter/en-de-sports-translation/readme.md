@@ -10,12 +10,32 @@ The origin of the text is in english and should than be automatically translated
 * Provide an automatic translation for sport news texts provided in english.  
 * Provide a report of the quality of the translation  
 
-## Tasks 
-* Split the received source data into test and training data  
-* Translate the english text using the "WMT system from UEDIN". This translation is used as a baseline. Verify the quality of the automatic translation compared to the provided translation. Error division into basic error or context error.  
- * http://www.statmt.org/wmt19/robustness.html
+## Data Sources for the translation model
  * http://www.statmt.org/wmt19/translation-task.html
 
-## Upcoming tasks
-* Translate the english text using the "Microsoft System from WMT19". Verify the quality of the automatic translation compared to the provided translation.  
-* Compare the two translations in a overview / report 
+# Implementation
+The implementation has two main parts: 
+* first preparing the received data
+* secondly creating the translation model. The translation model was implemented in to different ways using BPE and using the integrated sentence splitting of marian.  
+
+## Preparing the project data
+Documentation can be found [here](preparingProjectData.md)
+
+## Creating the translation model
+### Creating the training model using BPE 
+Documentation can be found [here](bpe.md)
+
+### Creating the training model using marian sentence splitting
+Documentation can be found [here](marian_sentencesplitting.md)
+
+# Translation using the model
+Documentation can be found [here](translation.md)
+
+# Further resources 
+* Subword to learn and apply BPE: https://github.com/rsennrich/subword-nmt
+* Marian documentation for sentence piece: https://github.com/marian-nmt/marian-examples/tree/master/training-basics-sentencepiece
+
+# Working questions
+- Implement the marian sentence splitter
+- marian-decode on every model and generate BLEU score
+- use the highest score model on test set and report that number
