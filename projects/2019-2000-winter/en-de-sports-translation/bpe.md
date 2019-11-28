@@ -45,6 +45,7 @@ cat 1-1-training_ready.de.data >> merged_data.de
 
 # create bpe_merges file
 git clone https://github.com/rsennrich/subword-nmt
+qsub -I -l select=1:ncpus=4:mem=12gb -l walltime=24:00:00
 cat merged_data.en merged_data.de  | ../external/subword-nmt/learn_bpe.py -s 32000 -o bpe_merges
 
 # Apply BPE to the training data

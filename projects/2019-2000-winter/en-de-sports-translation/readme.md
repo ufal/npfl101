@@ -36,6 +36,10 @@ Documentation can be found [here](translation.md)
 * Marian documentation for sentence piece: https://github.com/marian-nmt/marian-examples/tree/master/training-basics-sentencepiece
 
 # Working questions
-- Implement the marian sentence splitter
+- BPE to complicated -> run it again and request cpu and memory power
+- optimize BPE (get_vocab.py , learn_bpe -> --dict-input)
+- Implement the marian sentence splitter (waiting for answer of metacenter)
 - marian-decode on every model and generate BLEU score
 - use the highest score model on test set and report that number
+
+- can I also verify the translation with google translate?
