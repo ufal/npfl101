@@ -18,8 +18,11 @@ The implementation has two main parts:
 * first preparing the received data
 * secondly creating the translation model. The translation model was implemented in to different ways using BPE and using the integrated sentence splitting of marian.  
 
-## Preparing the project data
-Documentation can be found [here](preparingProjectData.md)
+## Preparing the project data without sentence splitting
+Documentation can be found [here](preparingProjectData_document.md)
+
+## Preparing the project data with sentence splitting
+Documentation can be found [here](preparingProjectData_sentence.md)
 
 ## Creating the translation model
 ### Creating the training model using BPE 
@@ -29,17 +32,39 @@ Documentation can be found [here](bpe.md)
 Documentation can be found [here](marian_sentencesplitting.md)
 
 # Translation using the model
-Documentation can be found [here](translation.md)
+Documentation can be found for the BPE example [here](translation_bpe.md)
+Documentation can be found for the sentence splitting example [here](translation_sentenceSplitting.md)
 
 # Further resources 
 * Subword to learn and apply BPE: https://github.com/rsennrich/subword-nmt
 * Marian documentation for sentence piece: https://github.com/marian-nmt/marian-examples/tree/master/training-basics-sentencepiece
 
 # Working questions
-- BPE to complicated -> run it again and request cpu and memory power
-- optimize BPE (get_vocab.py , learn_bpe -> --dict-input)
-- Implement the marian sentence splitter (waiting for answer of metacenter)
-- marian-decode on every model and generate BLEU score
-- use the highest score model on test set and report that number
+## BPE 
+- cat corpus into qruncmd "generate dictionary bpe" | learn-bpe
+   38  cat clip | tr ' ' '\n' | sort | uniq -c | sort -r -n
+   39  cat clip | tr ' ' '\n' | sort | uniq -c | sort  -n
+   40  cat clip | qruncmd --jobs=2 "tr ' ' '\n' | sort | uniq -c | sort  -n"
+   41  cat clip | ./qruncmd --jobs=2 "tr ' ' '\n' | sort | uniq -c | sort  -n"
 
-- can I also verify the translation with google translate?
+## Other
+- get the model at AI working
+
+# Questions
+## project data 
+* created corpus with documents
+* created corpus with sentence (used sentence splitter within python and in parallell)
+
+## Marian sentence splitting
+### document level 
+* running
+
+### sentence level 
+* running 
+
+## Othery
+### marian on longest sentences 
+https://github.com/google/sentencepiece/blob/master/src/trainer_interface.cc
+
+### workspace space 
+The working space is now set to: workspace 13024
