@@ -5,10 +5,9 @@
 qsub -q gpu -l select=1:ncpus=2:ngpus=1:mem=1gb:cl_doom=True -l walltime=1:00:00 -I
 
 #translate using the model 
-export TMP=/storage/plzen1/home/levellj/temp/
-module add cmake-3.6.1
 module add cuda-8.0
-module add gcc-5.3.0
+export TMP=/storage/plzen1/home/levellj/temp/
+
 ./marian-decoder   \
   --models model_old/model.npz.best-bleu-detok.npz  \
   --vocabs model_old/vocab.en.spm model/vocab.de.spm \

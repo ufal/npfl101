@@ -1,15 +1,14 @@
-# Preparing the project data 
-Goal prepare the documents into training, test and dev for both german and english.  
-The articles are left as they are and not split by sentences. 
+# Preparing and polish the data: Document level - Without sentence splitting
+Goal prepare the received document into dev, training and test for both German and English.  
+The articles are left as they are and not split by sentences, therefore we can compare the translation performance on articel level. 
 
 ## Tasks
- * Split source file into test, dev and training (verify encoding UTF-8, unix file type)
- * Split document into dev.en, dev.de and test.en, test.de and training.en, traning.de
- * Add the training set to the training data and execute marian tranining 
+ * Split source file into dev, training and test (verify encoding UTF-8, unix file type)
+ * Split document into dev.en, dev.de and test.en, test.de and training.en, traning.de 
 
 ```
 #change delimeter to ;
-#execute powershell script to ensure encoding and line breaks
+#execute powershell script [prepareProjectData.ps1] to ensure encoding and line breaks
 
 #migrate to unix file ending
 dos2unix original.csv 
@@ -47,14 +46,6 @@ sed -i "s/\\\"//g" test.en
 sed -i "s/\\\"//g" test.de
 sed -i "s/\\\"//g" training.en
 sed -i "s/\\\"//g" training.de
-
-#remove empty lines
-sed -i '/^$/d' dev.en
-sed -i '/^$/d' dev.de
-sed -i '/^$/d' test.en
-sed -i '/^$/d' test.de
-sed -i '/^$/d' training.en
-sed -i '/^$/d' training.de
 
 #ensure the quality of the data
 paste training.de training.en /dev/null | tr '\t' '\n' | tail -12

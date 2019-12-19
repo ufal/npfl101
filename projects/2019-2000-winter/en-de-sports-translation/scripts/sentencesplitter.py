@@ -1,7 +1,13 @@
 # encoding: utf-8
 
-#extracts the sentences of a given file and returns them as stdout put
-#Based on: https://pypi.org/project/sentence-splitter/
+# -------------------------------------------------------------------------
+# Author: James Levell
+# Date: 2019-12-19
+# Version: 1.0
+# Comment: Based on an given file and input langauge, reads the content of the file and splits the content by sentence. Ouptut is outputed on the screen 
+# Based on: https://pypi.org/project/sentence-splitter/
+# History:	R1	2019-12-19	Levell James	Initial Build
+# --------------------------------------------------------------------------
 
 import sys
 import os

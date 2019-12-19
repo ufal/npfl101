@@ -1,4 +1,13 @@
-$content = Import-Csv -Path "C:\Users\jimmy\OneDrive\Dokumente\Schule\Studium\_Semester7\Competing Machine Learning\original.csv" -Delimiter ";" -Encoding UTF8
+# -------------------------------------------------------------------------
+# Author: James Levell
+# Date: 2019-12-19
+# Version: 1.0
+# Comment: Given a source file, iterats through the lines and removes inline line return. 
+# History:	R1	2019-12-19	Levell James	Initial Build
+# --------------------------------------------------------------------------
+
+$sourceFile = ""
+$content = Import-Csv -Path $sourceFile -Delimiter ";" -Encoding UTF8
 
 foreach($line in $content)
 {
