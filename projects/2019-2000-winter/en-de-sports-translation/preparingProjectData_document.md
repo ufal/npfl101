@@ -1,6 +1,7 @@
-# Preparing and polish the data: Document level - Without sentence splitting
-Goal prepare the received document into dev, training and test for both German and English.  
-The articles are left as they are and not split by sentences, therefore we can compare the translation performance on articel level. 
+# Preparing and polish the data: Document level - without sentence splitting
+Goal prepare the received document into dev, training and test sets for both German and English.  
+The articles are left as they are and are not split by sentences.  
+Therefore we can compare the translation performance on articel level to the sentence level translation. 
 
 ## Tasks
  * Split source file into dev, training and test (verify encoding UTF-8, unix file type)
