@@ -6,6 +6,7 @@
 # Version: 1.0
 # Comment: Validate script used for marian validation bsed
 # Based on: https://github.com/marian-nmt/marian-examples/blob/master/wmt2017-transformer/scripts/validate.sh
+# Requires: moses scripts
 # History:	R1	2019-12-19	Levell James	Initial Build
 # --------------------------------------------------------------------------
 

@@ -16,12 +16,11 @@ cat ../projectData_sentence/training.de >> merged_data.de_sentence
 
 ## Building the model using sentence splitting
 ```
-#build the model
 qsub -q gpu -l select=1:ncpus=4:ngpus=2:mem=20gb:cl_adan=True -l walltime=24:00:00 -I
 module add cuda-8.0 #https://wiki.metacentrum.cz/wiki/Cuda_(Nvidia) accept license before
 export TMP=/storage/plzen1/home/levellj/temp/
 
-#sentence level 
+# sentence level 
 mkdir model_sentence
 ./marian \
     --devices 0 1  \

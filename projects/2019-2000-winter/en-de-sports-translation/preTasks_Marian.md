@@ -29,7 +29,7 @@ make -j 4
 ./marian --help |& grep sentencepiece
 ```
 
-# create lanaguge corpus for training
+# Create language corpus for training
 For training the model all the provided data will be combined
  * Europarl: http://www.statmt.org/europarl/v9/training/europarl-v9.de-en.tsv.gz
  * News-commentry: http://data.statmt.org/news-commentary/v14/training/news-commentary-v14.de-en.tsv.gz
@@ -38,11 +38,11 @@ For training the model all the provided data will be combined
  * Common crawl corpus: http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz
 
 ```
-#ensure correct encoding
+# ensure correct encoding
 export LC_ALL=C 
 export LANG="de_DE.utf8"
 
-#download training data
+# download training data
 cd rawdata
 wget http://www.statmt.org/europarl/v9/training/europarl-v9.de-en.tsv.gz
 wget http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz
@@ -52,7 +52,7 @@ wget https://s3.amazonaws.com/web-language-models/paracrawl/release5/en-de.bicle
 
 tar xzf training-parallel-commoncrawl.tgz
 
-#build merged data 
+# build merged data 
 zcat en-de.bicleaner07.txt.gz europarl-v9.de-en.tsv.gz news-commentary-v14.de-en.tsv.gz wikititles-v1.de-en.tsv.gz > merged_data
 
 cut -f1 merged_data > merged_data.en

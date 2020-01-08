@@ -7,7 +7,7 @@
  * Extract the 1-1 matches of the sentnces to get dev_1_1.en, dev_1_1.de and test_1_1.en, test_1_1.de and training_1_1.en, traning_1_1.de
 
 ```
-#sentence splitting (one sentence per line)
+# sentence splitting (one sentence per line)
 ../external/sentencesplitter.py dev.en.txt en > dev_sentence.en.txt
 ../external/sentencesplitter.py dev.de.txt de > dev_sentence.de.txt
 
@@ -17,12 +17,12 @@
 ../external/sentencesplitter.py training.en.txt en > training_sentence.en.txt
 ../external/sentencesplitter.py training.de.txt de > training_sentence.de.txt
 
-#execute the honey allignment and only store the 1-1 matches 
+# execute the honey allignment and only store the 1-1 matches 
 ../external/allignment.perl dev_sentence.en.txt dev_sentence.de.txt | grep "^1-1"  > parallel_corpus_1_1.dev
 ../external/allignment.perl test_sentence.en.txt test_sentence.de.txt | grep "^1-1"  > parallel-corpus_1_1.test
 ../external/allignment.perl training_sentence.en.txt training_sentence.de.txt | grep "^1-1"  > parallel-corpus_1_1.training
 
-#extract the 1-1 matches
+# extract the 1-1 matches
 cut -f3 parallel_corpus_1_1.dev > dev_1_1.en
 cut -f3 parallel-corpus_1_1.test > test_1_1.en
 cut -f3 parallel-corpus_1_1.training > training_1_1.en
@@ -31,7 +31,7 @@ cut -f4 parallel_corpus_1_1.dev > dev_1_1.de
 cut -f4 parallel-corpus_1_1.test > test_1_1.de
 cut -f4 parallel-corpus_1_1.training > training_1_1.de
 
-#verify the quality 
+# verify the quality 
 paste dev_1_1.de dev_1_1.en /dev/null | tr '\t' '\n' | tail -12
 wc dev_1_1.en dev_1_1.de
 wc test_1_1.de test_1_1.en

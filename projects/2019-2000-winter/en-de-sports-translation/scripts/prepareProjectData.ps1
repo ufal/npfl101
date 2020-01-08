@@ -2,11 +2,11 @@
 # Author: James Levell
 # Date: 2019-12-19
 # Version: 1.0
-# Comment: Given a source file, iterats through the lines and removes inline line return. 
+# Comment: Given a source file, iterats through the lines and removes inline CRLF 
 # History:	R1	2019-12-19	Levell James	Initial Build
 # --------------------------------------------------------------------------
 
-$sourceFile = ""
+$sourceFile = "<please define me>"
 $content = Import-Csv -Path $sourceFile -Delimiter ";" -Encoding UTF8
 
 foreach($line in $content)

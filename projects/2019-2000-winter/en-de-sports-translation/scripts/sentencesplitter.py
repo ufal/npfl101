@@ -5,6 +5,7 @@
 # Date: 2019-12-19
 # Version: 1.0
 # Comment: Based on an given file and input langauge, reads the content of the file and splits the content by sentence. Ouptut is outputed on the screen 
+# Usage: sentencesplitter.py "inputfile" > sentessplittedresult.txt
 # Based on: https://pypi.org/project/sentence-splitter/
 # History:	R1	2019-12-19	Levell James	Initial Build
 # --------------------------------------------------------------------------
@@ -19,6 +20,8 @@ from sentence_splitter import SentenceSplitter, split_text_into_sentences
 ##############################################################################
 # Functions section
 ##############################################################################
+
+# given a content and the input language of that content, returns the sentence splitted content 
 def split_into_sentences(content, input_language):
     """
         Tasks with takes an input text and splits it into sentence 
@@ -38,16 +41,16 @@ def split_into_sentences(content, input_language):
 # main
 ##############################################################################
 
-#ensure encoding
+# ensure encoding
 if sys.stdout.encoding != 'UTF-8':
     sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
 
-#get argv
+# get calling arguments
 input_file = sys.argv[1]
 input_language = sys.argv[2]
-executor = ThreadPoolExecutor(max_workers=8)
+executor = ThreadPoolExecutor(max_workers=8)        # create workers which can work in paralel
 
-#open file and give tasks to workers
+# open file, split it into junks, give parts to the worker and execute function on it
 with open(input_file, mode="r", encoding="utf-8") as file:
     if file.mode == "r":
         temp_lines = file.readlines(4048)
