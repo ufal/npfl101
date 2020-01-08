@@ -1,6 +1,6 @@
 # Verifying the result of the translation 
 The goal is to compare the newly created marian translation model with publicly available translators like Google translator and Deepl.  
-To compare the results of each translation we are calculating the BLEU values for each translation.  The results are splitted for the document level and the sentence level translation.  
+To compare the results of each translation we are calculating the BLEU values for each translation.  The results are split for the document level and the sentence level translation.  
 
 ## Generating BLEU values for documents translated on a document level  
 For the following translations the whole document was used as input.  

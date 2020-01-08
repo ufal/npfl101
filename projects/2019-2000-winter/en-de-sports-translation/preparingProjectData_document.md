@@ -5,8 +5,9 @@ Therefore we can compare the translation performance on articel level to the sen
 
 ## Tasks
  * Split source file into dev, training and test (verify encoding UTF-8, unix file type)
- * Split document into dev.en, dev.de and test.en, test.de and training.en, traning.de 
+ * Split document into the indivdual lanaguges (dev.en, dev.de and test.en, test.de and training.en, traning.de) 
 
+## Code
 ```
 # change delimeter to ;
 #execute powershell script [prepareProjectData.ps1] to ensure encoding and line breaks

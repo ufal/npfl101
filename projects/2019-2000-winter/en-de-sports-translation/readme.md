@@ -4,8 +4,8 @@ Author: James Levell (leveljam@students.zhaw.ch)
 
 ## Project setup 
 The company would like to provide their sports results also in other languages. This translation should be provided automized.  
-The origin language of the article is in English and should than be automatically translated. In this part of the projcet we are focusing only on the English -> German translation.  
-The articles consists only of several short sentences, common in news tickers.  
+The origin language of the article is in English and should than be automatically translated into other target languages. In this part of the project we are focusing only on the English to German translation.  
+The articles consits only of several short sentences, common in news tickers.  
 
 ## Project goal  
 * Provide an automatic translation for sport news texts provided in English  
@@ -16,11 +16,11 @@ The articles consists only of several short sentences, common in news tickers.
 
 # Implementation
 The implementation is split into the following parts:  
-* Prepare and polish the received data from the costumer and generating dev, training and test set  
-* Use the data sources combined with the domain specific training data to train the model  
+* Prepare the project data: prepare and polish the received data from the costumer and generating dev, training and test set  
+* Creating the model: Use the data sources combined with the domain specific training data to train the model  
   * One model is trained on sentence level 
   * The other model is trained on a document / article level 
-* Use the model to translate the test set and verify it against common known translators  
+* Translation: use the model to translate the test set and verify it against common known translators  
 
 # Preparing and polish the data 
 The goal is to prepare the received data so it can be used as training, dev and test set.  
@@ -37,10 +37,10 @@ In this section the aim is to train the model with the data sources and the doma
 ## Pretask 
 The following tasks have to be executed either on which level: [here](preTasks_Marian.md)
 
-## Document level
+## Document level model
 Documentation can be found [here](marian_sentencesplitting_document.md)
 
-## Sentence level 
+## Sentence level model
 Documentation can be found [here](marian_sentencesplitting_sentence.md)
 
 # Translation using the model

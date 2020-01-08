@@ -4,7 +4,7 @@
  * This task is based on the document level files (dev.en.txt, dev.de.txt and test.en.txt, test.de.txt and training.en.txt, training.de.txt) generated using [this](preparingProjectData_document.md) manual
  * Split all of these documents by sentences into dev_sentence.en, dev_sentence.de and test_sentence.en, test_sentence.de and training_sentence.en, traning_sentence.de
  * Execute honey alignment on the sets to generate parallel_corpus.dev, parallel_corpus.test, parallel_corpus.training
- * Extract the 1-1 matches of the sentnces to get dev_1_1.en, dev_1_1.de and test_1_1.en, test_1_1.de and training_1_1.en, traning_1_1.de
+ * Extract the 1-1 matches of the sentences to get dev_1_1.en, dev_1_1.de and test_1_1.en, test_1_1.de and training_1_1.en, traning_1_1.de
 
 ```
 # sentence splitting (one sentence per line)

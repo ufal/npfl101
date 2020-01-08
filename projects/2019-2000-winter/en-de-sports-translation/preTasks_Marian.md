@@ -3,7 +3,7 @@
 ## Tasks 
 * Install dependencies for marian 
 * Build marian with sentence splitting option enabled 
-* Create tranining corpus 
+* Create training corpus 
 
 ## Dependencies
 Install the following dependencies before complining marian.  
