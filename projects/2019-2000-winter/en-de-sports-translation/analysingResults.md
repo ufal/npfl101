@@ -70,6 +70,6 @@ BLEU = 37.49, 64.9/42.3/30.9/23.3 (BP=1.000, ratio=1.000, hyp_len=117631, ref_le
 
 ## Conclusion 
 The following conclusions can be made on the above BLEU values. 
-* Our domain specificly created translation model performs better than Google Translator 
+* Our domain specifically created translation model performs better than Google Translator 
 * Best translator over all is Deepl
 * To reach a better performance of the translation we should always consider sentence level translation. 
