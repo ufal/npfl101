@@ -1,0 +1,12 @@
+models:
+  - /storage/plzen1/home/memduh/npfl101/projects/2019-2020-winter/memduh/exp/transformer/en2tr/model.back/model.npz.best-translation.npz
+vocabs:
+  - /storage/plzen1/home/memduh/npfl101/projects/2019-2020-winter/memduh/exp/transformer/en2tr/model/vocab.ende.yml
+  - /storage/plzen1/home/memduh/npfl101/projects/2019-2020-winter/memduh/exp/transformer/en2tr/model/vocab.ende.yml
+beam-size: 12
+normalize: 1
+word-penalty: 0
+mini-batch: 64
+maxi-batch: 100
+maxi-batch-sort: src
+relative-paths: false
