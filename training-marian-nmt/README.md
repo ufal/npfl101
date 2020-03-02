@@ -7,6 +7,7 @@ This file describes how to train your own NMT system using the Marian toolkit.
 NMT needs large-memory GPU cards (4 GB at least, better with 8 GB, or more GPUs at once). Register at MetaCentrum to get access to a machine with such a card.
 
 Doom machines have 5GB cards and Gram machines have 6GB cards. I tested doom.
+There are also Adan machines which have the largest GPUs.
 
 To get to a GPU, use these commands:
 
