@@ -1,6 +1,6 @@
 for problem in tr2en en2tr tr2en_analyzed
 do
-	mkdir -p translations/$problem
+	mkdir -p translations/default/$problem
 
 	if [ "$problem" = "tr2en"  ] ; then
 		dev_file=data/preprocessed/dev.bpe.tr
@@ -19,7 +19,17 @@ do
 	for model in `ls models/$problem.iter*.npz`
 	do
 		iter_count=`echo $model | cut -f2 -d"."`
-		translation_path=translations/$problem/$iter_count
+		translation_path=translations/default/$problem/$iter_count
+		if [ ! -f $translation_path ]; then
+			bash scripts/eval/translate_job.sh $model $src_vocab $tgt_vocab $dev_file $translation_path 
+		fi
+	done
+
+	mkdir -p translations/transformer/$problem
+	for model in `ls transformer_training/$problem.iter*.npz`
+	do
+		iter_count=`echo $model | cut -f2 -d"."`
+		translation_path=translations/transformer/$problem/$iter_count
 		if [ ! -f $translation_path ]; then
 			bash scripts/eval/translate_job.sh $model $src_vocab $tgt_vocab $dev_file $translation_path 
 		fi

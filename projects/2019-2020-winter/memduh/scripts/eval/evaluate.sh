@@ -23,27 +23,27 @@ do
 	done
 done
 
-mkdir -p results
-if [ ! -f results/tr2en.txt ]; then
+mkdir -p results/default results/transformer
+if [ ! -f results/default/tr2en.txt ]; then
 	for file in `ls -v translations/tr2en/postproc`
 	do
 		result=`perl scripts/multi-bleu-detok.perl data/dev.en < translations/tr2en/postproc/$file`
-		echo $file - $result >> results/tr2en.txt
+		echo $file - $result >> results/default/tr2en.txt
 	done
 fi
 
-if [ ! -f results/tr2en_analyzed.txt ]; then
+if [ ! -f results/default/tr2en_analyzed.txt ]; then
 	for file in `ls -v translations/tr2en_analyzed/postproc`
 	do
 		result=`perl scripts/multi-bleu-detok.perl data/dev.en < translations/tr2en_analyzed/postproc/$file`
-		echo $file - $result >> results/tr2en_analyzed.txt
+		echo $file - $result >> results/default/tr2en_analyzed.txt
 	done
 fi
 
-if [ ! -f results/en2tr.txt ]; then
+if [ ! -f results/default/en2tr.txt ]; then
 	for file in `ls -v translations/en2tr/postproc`
 	do
 		result=`perl scripts/multi-bleu-detok.perl data/dev.tr < translations/en2tr/postproc/$file`
-		echo $file - $result >> results/en2tr.txt
+		echo $file - $result >> results/default/en2tr.txt
 	done
 fi
