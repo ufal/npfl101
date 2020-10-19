@@ -1,4 +1,4 @@
-= NPFL101 projects in winter term 2020/2021
+# NPFL101 projects in winter term 2020/2021
 
 Due to COVID pandemic, the seminar is being held remotely.
 
