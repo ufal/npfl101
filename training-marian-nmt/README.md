@@ -6,8 +6,9 @@ This file describes how to train your own NMT system using the Marian toolkit.
 
 NMT needs large-memory GPU cards (4 GB at least, better with 8 GB, or more GPUs at once). Register at MetaCentrum to get access to a machine with such a card.
 
-Doom machines have 5GB cards and Gram machines have 6GB cards. I tested doom.
-There are also Adan machines which have the largest GPUs.
+<a href="https://metavo.metacentrum.cz/pbsmon2/resource/doom.metacentrum.cz">Doom machines</a> (your MetaCentrum login is needed to access that page) have 5GB cards and Gram machines have 6GB cards. I tested doom.
+
+There are also <a href="https://wiki.metacentrum.cz/wiki/Cluster_Adan">Adan machines</a> which have the largest GPUs.
 
 To get to a GPU, use these commands:
 
@@ -15,19 +16,66 @@ To get to a GPU, use these commands:
 # First get to MetaCentrum
 ssh nympha.zcu.cz  # or use another entry node
 
-# Submit an interactive PBS job to get access to a GPU machine
+# Submit an interactive PBS job to get access to a doom GPU machine
 qsub -q gpu -l select=1:ncpus=2:ngpus=1:mem=20gb:cl_doom=True \
      -l walltime=03:00 -I
   # !!! the -l flags says that your job will be killed after 3 minutes
   # all -q gpu jobs will be killed after 24 hours
   # use -q gpu_long and ask for up to 168 hours
   # you can ask for 2 gpus, always ask for 2x as many CPUs as GPUs
-Compiling Marian
-ssh nympha.zcu.cz # or another MetaCentrum node
+
+# Submit an interactive PBS job to get access to an adan GPU machine
+qsub -q gpu -l select=1:ncpus=2:ngpus=1:mem=20gb:cl_adan=True \
+     -l walltime=03:00 -I
+  # !!! warning, just a 3-min test only!
+```
+
+## Useful Commands
+
+### Useful Commands for MetaCentrum
+
+```
+# Find out which CUDA versions are available in module system
+module available 2>&1 | grep ^cuda
+
+# List my running jobs:
+qstat -u $USER
+```
+
+### Useful Commands for GPUs in General
+
+```
+# Check which (if any!) GPUs you are allowed to use now
+echo $CUDA_VISIBLE_DEVICES
+
+# Check if any of your jobs is running on GPU and how much memory is free
+nvidia-smi
+
+# If $CUDA_VISIBLE_DEVICES contains just one GPU, you can get details about it:
+nvidia-smi -i $CUDA_VISIBLE_DEVICES
+
+# Steal someone's allocated GPU
+export CUDA_VISIBLE_DEVICES=GPU-bbe91f18-4c8c-693a-2976-75acf1fc76c2
+  # put there whatever you saw in echo $CUDA_VISIBLE_DEVICES
+  # obviously, never steal GPU from anyone else than yourself!
+  # remember that your GPU allocation in the main job can finish and the thief
+  #job can remain running, so be very careful with this.
+```
+
+## Basic Marian Compilation (SentencePiece not built in)
+
+```
+ssh nympha.zcu.cz # or another MetaCentrum entry node
 ssh doom7
   # or another free node, as visible here: https://metavo.metacentrum.cz/pbsmon2/resource/doom.metacentrum.
+  # for adan, ssh e.g. to adan47
+```
+
 Note: For training never just ssh to the machine, always use PBS/qsub as shown above. For compilation, you may use ssh, but check if the machine is not already overloaded (run top).
 
+Note2: Each of the MetaCentrum clusters *has a different home*.
+
+```
 # Activate prerequisites using MetaCentrum setup tools:
 module add cmake-3.6.1
 module add cuda-8.0
@@ -53,13 +101,42 @@ cmake ..
 make -j
 ```
 
+# Compiling Marian with SentencePiece
+
+## Dependencies
+Install the following dependencies before complining marian.  
+```
+module add protobuf-3.11.0
+module add gperftools-2.7 
+module add cmake-3.6.1
+module add cuda-8.0
+module add gcc-5.3.0
+ppath=/software/protobuf/3.11.0/
+```
+
+## Building marian with sentence splitting enabled
+```
+git clone https://github.com/marian-nmt/marian marian_sentencesplitting
+cd marian_sentencesplitting
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_SENTENCEPIECE=ON -DPROTOBUF_LIBRARY=$ppath/lib/libprotobuf.so -DPROTOBUF_INCLUDE_DIR=$ppath/include -DPROTOBUF_PROTOC_EXECUTABLE=$ppath/bin/protoc -DTCMALLOC_LIB=/software/gperftools/2.7/lib/libtcmalloc.so -DCMAKE_INSTALL_PREFIX=../bin 
+make -j 4
+
+# verify the piecing is available
+./marian --help |& grep sentencepiece
+```
+
 ## Getting Sample Training Data
 
-There are two options, you are free to choose any of them with no impact on your homework score.
+There are two options of the sample training data, you are free to choose any of them.
 
-Dataset A is smaller and easier to train. BLEU scores on its corresponding testset will be higher, but the alignment as well as translation quality on our final czenali corpus will be lower.
+Dataset A is smaller and easier to train. BLEU scores on its corresponding testset will be higher, but the alignment as well as translation quality will be lower.
 
-Dataset B is realistic, you can get a very good English-Czech MT system with it. Aside from the (much) longer training time needed, you will also need to work with subword units, i.e. break words into short sequences of characters. The translation quality on our final czenali test set will be much higher and the alignment quality will be also higher, but you will have to deal with alignments predicted for subwords instead of the original tokens.
+Dataset B is realistic, you can get a good English-Czech MT system with
+it. Aside from the (much) longer training time needed, you will also need to
+work with subword units, i.e. break words into short sequences of characters.
+The final translation quality will be much higher.
 
 ### A: Small and Simple Dataset
 Use the training, development and test corpus from WMT Multimodal Task, as available from the Multi30k Github repository.
@@ -122,7 +199,7 @@ marian \
 
 Make sure to use the correct training files depending on your dataset choice: train.***.src and train.***.tgt.
 
-The above flags saved a model about every 5 minutes. In early stages of debugging, use --save-freq and --disp-freq of 100.
+The above flags saved a model about every 5 minutes  (too frequent, you will have too many models on your disk). In early stages of debugging, use --save-freq and --disp-freq of 100. For normal training, save ~every hour, e.g. ``--save-freq 10000``
 
 Use --devices 0 if you asked for just 1 GPU.
 
@@ -162,10 +239,16 @@ Here are MetaCentrum instructions on submitting jobs. Remember you need to ask f
 
 Also remember that you need to module add cuda-8.0 in the job script.
 
-Translate with the First Saved Model
+# Translate with the First Saved Model
 The training will take very long time. We can test any saved model, independently.
 
 ## Translating on GPU (marian)
+
+If you use a small model (e.g. for dataset A) and a big GPU (e.g. 16 GB one on
+adan), you can easily keep training and testing at the same time.
+Use
+``nvidia-smi`` in a separate ssh connection to that machine to see how GPU
+memory is being used.
 
 In the following commands, you will have to use the corresponding vocabulary files that Marian created for you. Do not blindly copy-paste train.src.yml train.tgt.yml:
 
