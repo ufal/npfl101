@@ -78,7 +78,7 @@ Note2: Each of the MetaCentrum clusters *has a different home*.
 ```
 # Activate prerequisites using MetaCentrum setup tools:
 module add cmake-3.6.1
-module add cuda-8.0
+module add cuda-9.0
 module add gcc-5.3.0
   # this particular GCC is needed for good compatibility with CUDA
 
@@ -109,7 +109,7 @@ Install the following dependencies before complining marian.
 module add protobuf-3.11.0
 module add gperftools-2.7 
 module add cmake-3.6.1
-module add cuda-8.0
+module add cuda-9.0
 module add gcc-5.3.0
 ppath=/software/protobuf/3.11.0/
 ```
